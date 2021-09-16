@@ -1,7 +1,7 @@
 //main--------------------------------------------------------------
 //display variable
-const displayString     = document.getElementById("display-string");
-document.getElementById("display-string").innerHTML = "0";
+let displayString     = "0";
+document.getElementById("display-string").innerHTML = displayString;
 
 //button variables
 const buttonZero        = document.getElementById("zero");
@@ -32,13 +32,27 @@ buttonSix.addEventListener('click', appendDisplayString, false);
 buttonSeven.addEventListener('click', appendDisplayString, false);
 buttonEight.addEventListener('click', appendDisplayString, false);
 buttonNine.addEventListener('click', appendDisplayString, false);
+buttonAdd.addEventListener('click', appendDisplayString, false);
+buttonMultiply.addEventListener('click', appendDisplayString, false);
+buttonSubtract.addEventListener('click', appendDisplayString, false);
+buttonDivide.addEventListener('click', appendDisplayString, false);
 
 //-----------------------------------------------------------------------
-//Click funtions to add to display string
+//Event functions
 function appendDisplayString(e)
 {
-    let number = this.textContent;
-    console.log(number);
+    let nextStringCharacter = this.textContent;
+
+    if(displayString === "0")
+    {
+        displayString = nextStringCharacter;
+    }
+    else
+    {
+        displayString += nextStringCharacter; 
+    }
+
+    document.getElementById("display-string").innerHTML = displayString;
 }
 
 //Operation Functions
