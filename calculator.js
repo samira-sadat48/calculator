@@ -37,6 +37,8 @@ buttonMultiply.addEventListener('click', appendDisplayString, false);
 buttonSubtract.addEventListener('click', appendDisplayString, false);
 buttonDivide.addEventListener('click', appendDisplayString, false);
 
+buttonClear.addEventListener('click', resetDisplayString, false);
+
 //-----------------------------------------------------------------------
 //Event functions
 function appendDisplayString(e)
@@ -52,6 +54,12 @@ function appendDisplayString(e)
         displayString += nextStringCharacter; 
     }
 
+    document.getElementById("display-string").innerHTML = displayString;
+}
+
+function resetDisplayString(e)
+{
+    displayString = "0";
     document.getElementById("display-string").innerHTML = displayString;
 }
 
