@@ -1,7 +1,13 @@
 //main--------------------------------------------------------------
 //display variable
-let displayString     = "0";
-document.getElementById("display-string").innerHTML = displayString;
+let firstNumber = 0;
+let secondNumber = 0;
+let operation = "";
+
+let displayStringBottom     = "0";
+let displayStringTop        = "";
+document.getElementById("display-string-top").innerHTML = displayStringTop;
+document.getElementById("display-string-bottom").innerHTML = displayStringBottom;
 
 //button variables
 const buttonZero        = document.getElementById("zero");
@@ -22,45 +28,87 @@ const buttonEquals      = document.getElementById("equals");
 const buttonClear       = document.getElementById("clear");
 
 //button event listeners
-buttonZero.addEventListener('click', appendDisplayString, false);
-buttonOne.addEventListener('click', appendDisplayString, false);
-buttonTwo.addEventListener('click', appendDisplayString, false);
-buttonThree.addEventListener('click', appendDisplayString, false);
-buttonFour.addEventListener('click', appendDisplayString, false);
-buttonFive.addEventListener('click', appendDisplayString, false);
-buttonSix.addEventListener('click', appendDisplayString, false);
-buttonSeven.addEventListener('click', appendDisplayString, false);
-buttonEight.addEventListener('click', appendDisplayString, false);
-buttonNine.addEventListener('click', appendDisplayString, false);
-buttonAdd.addEventListener('click', appendDisplayString, false);
-buttonMultiply.addEventListener('click', appendDisplayString, false);
-buttonSubtract.addEventListener('click', appendDisplayString, false);
-buttonDivide.addEventListener('click', appendDisplayString, false);
+buttonZero.addEventListener('click', appendDisplayStringBottom, false);
+buttonOne.addEventListener('click', appendDisplayStringBottom, false);
+buttonTwo.addEventListener('click', appendDisplayStringBottom, false);
+buttonThree.addEventListener('click', appendDisplayStringBottom, false);
+buttonFour.addEventListener('click', appendDisplayStringBottom, false);
+buttonFive.addEventListener('click', appendDisplayStringBottom, false);
+buttonSix.addEventListener('click', appendDisplayStringBottom, false);
+buttonSeven.addEventListener('click', appendDisplayStringBottom, false);
+buttonEight.addEventListener('click', appendDisplayStringBottom, false);
+buttonNine.addEventListener('click', appendDisplayStringBottom, false);
 
-buttonClear.addEventListener('click', resetDisplayString, false);
+buttonAdd.addEventListener('click', appendDisplayStringTop, false);
+buttonAdd.addEventListener('click', storeFirstNumberandOperation, false);
+buttonMultiply.addEventListener('click', appendDisplayStringTop, false);
+buttonMultiply.addEventListener('click', storeFirstNumberandOperation, false);
+buttonSubtract.addEventListener('click', appendDisplayStringTop, false);
+buttonSubtract.addEventListener('click', storeFirstNumberandOperation, false);
+buttonDivide.addEventListener('click', appendDisplayStringTop, false);
+buttonDivide.addEventListener('click', storeFirstNumberandOperation, false);
+
+buttonEquals.addEventListener('click',calculateEquation, false);
+buttonClear.addEventListener('click', resetDisplayStrings, false);
 
 //-----------------------------------------------------------------------
 //Event functions
-function appendDisplayString(e)
+//On number button click
+function appendDisplayStringBottom(e)
 {
     let nextStringCharacter = this.textContent;
+    console.log(nextStringCharacter);
 
-    if(displayString === "0")
+    if(displayStringBottom === "0")
     {
-        displayString = nextStringCharacter;
+        displayStringBottom = nextStringCharacter;
     }
     else
     {
-        displayString += nextStringCharacter; 
+        displayStringBottom += nextStringCharacter; 
     }
 
-    document.getElementById("display-string").innerHTML = displayString;
+    document.getElementById("display-string-bottom").innerHTML = displayStringBottom;
 }
 
-function resetDisplayString(e)
+//on operation button click
+function appendDisplayStringTop(e)
+{   
+    console.log('event click')
+    displayStringTop = displayStringBottom + this.textContent;
+    document.getElementById("display-string-top").innerHTML = displayStringTop;
+}
+
+function storeFirstNumberandOperation(e)
 {
-    displayString = "0";
-    document.getElementById("display-string").innerHTML = displayString;
+    firstNumber = displayStringBottom;//convert to int?
+    operation = this.textContent;
+    resetBottomDisplayString();
+}
+
+function resetDisplayStrings(e)
+{
+    resetBottomDisplayString();
+    resetTopDisplayString();
+}
+
+//----------------------------------------------------------------------------
+
+function resetBottomDisplayString()
+{
+    displayStringBottom = "0";
+    document.getElementById("display-string-bottom").innerHTML = displayStringBottom;
+}
+
+function resetTopDisplayString()
+{
+    displayStringTop = "";
+    document.getElementById("display-string-top").innerHTML = displayStringTop;
+}
+
+function calculateEquation(e)
+{
+    
 }
 
 //Operation Functions
