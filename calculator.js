@@ -49,6 +49,7 @@ buttonDivide.addEventListener('click', appendDisplayStringTop, false);
 buttonDivide.addEventListener('click', storeFirstNumberandOperation, false);
 
 buttonEquals.addEventListener('click',calculateEquation, false);
+//buttonEquals.addEventListener('click',appendDisplayStringTop, false);
 buttonClear.addEventListener('click', resetDisplayStrings, false);
 
 //-----------------------------------------------------------------------
@@ -81,9 +82,18 @@ function appendDisplayStringTop(e)
 
 function storeFirstNumberandOperation(e)
 {
-    firstNumber = displayStringBottom;//convert to int?
+    firstNumber = parseInt(displayStringBottom);
     operation = this.textContent;
     resetBottomDisplayString();
+}
+
+//on equals button click
+function calculateEquation(e)
+{
+    secondNumber = parseInt(displayStringBottom);
+    result = operate(firstNumber,operation,secondNumber);
+    displayStringBottom = result;
+    document.getElementById("display-string-bottom").innerHTML = displayStringBottom;
 }
 
 function resetDisplayStrings(e)
@@ -94,6 +104,7 @@ function resetDisplayStrings(e)
 
 //----------------------------------------------------------------------------
 
+//local functions
 function resetBottomDisplayString()
 {
     displayStringBottom = "0";
@@ -106,10 +117,6 @@ function resetTopDisplayString()
     document.getElementById("display-string-top").innerHTML = displayStringTop;
 }
 
-function calculateEquation(e)
-{
-    
-}
 
 //Operation Functions
 function add(num1, num2)
